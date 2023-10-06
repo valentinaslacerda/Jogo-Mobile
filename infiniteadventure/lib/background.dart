@@ -1,10 +1,9 @@
 import 'package:flame/components.dart';
 import 'package:infiniteadventure/main.dart';
 
-class Background extends SpriteComponent with HasGameRef<EndlessAdventure>{
-
+class Background extends SpriteComponent with HasGameRef<EndlessAdventure> {
   @override
-  onLoad() async{
+  onLoad() async {
     // TODO: implement onLoad
     super.onLoad();
 

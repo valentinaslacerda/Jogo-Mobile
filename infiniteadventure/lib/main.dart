@@ -8,64 +8,50 @@ import 'package:flame/parallax.dart';
 import 'package:flutter/widgets.dart';
 import 'package:infiniteadventure/person.dart';
 
-void main(){
+void main() {
   WidgetsFlutterBinding.ensureInitialized();
   Flame.device.fullScreen();
   runApp(GameWidget(
-    game: EndlessAdventure(),
-    loadingBuilder: (context) {
-      return Text("carregando");
-    
-    } 
-      
-  ));
+      game: EndlessAdventure(),
+      loadingBuilder: (context) {
+        return Text("carregando");
+      }));
 }
 
-
-class EndlessAdventure extends FlameGame with TapCallbacks{
-
+class EndlessAdventure extends FlameGame with TapCallbacks {
   late Person _person;
   //late Platform _platform;
 
   @override
-  FutureOr<void> onLoad() async{
+  FutureOr<void> onLoad() async {
     // TODO: implement onLoad
 
     final images = [
-      loadParallaxImage("bg2.jpg", repeat: ImageRepeat.repeat),
+      loadParallaxImage("bg2.jpeg", repeat: ImageRepeat.repeat),
       //loadParallaxImage("")
-
-
     ];
 
     final layers = images.map((image) async => ParallaxLayer(
-      await image,
-      velocityMultiplier: Vector2((images.indexOf(image) + 1) * 2.0, 0),
-
-    ));
+          await image,
+          velocityMultiplier: Vector2((images.indexOf(image) + 1) * 2.0, 0),
+        ));
     final parallaxComponent = ParallaxComponent(
-      parallax: Parallax(
-        await Future.wait(layers),
-        baseVelocity: Vector2(50,0)
-      )
-    );
+        parallax:
+            Parallax(await Future.wait(layers), baseVelocity: Vector2(50, 0)));
     //ADD
     add(parallaxComponent);
     // tc = TextComponent(
-    //   text: 
+    //   text:
     // )
     _person = Person();
     add(_person);
 
     return super.onLoad();
-
   }
 
   @override
-  void update(double dt){
+  void update(double dt) {
     super.update(dt);
-
-    
   }
 
   @override
@@ -73,5 +59,4 @@ class EndlessAdventure extends FlameGame with TapCallbacks{
     print('tocou no jogo');
     _person.jump();
   }
-
 }
