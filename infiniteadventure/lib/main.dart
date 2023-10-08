@@ -5,6 +5,7 @@ import 'package:flame/events.dart';
 import 'package:flame/flame.dart';
 import 'package:flame/game.dart';
 import 'package:flame/parallax.dart';
+import 'package:flame/sprite.dart';
 import 'package:flutter/widgets.dart';
 import 'package:infiniteadventure/person.dart';
 
@@ -21,6 +22,7 @@ void main() {
 class EndlessAdventure extends FlameGame with TapCallbacks {
   late Person _person;
   //late Platform _platform;
+  
 
   @override
   FutureOr<void> onLoad() async {
@@ -58,5 +60,6 @@ class EndlessAdventure extends FlameGame with TapCallbacks {
   void onTapUp(TapUpEvent event) {
     print('tocou no jogo');
     _person.jump();
+    
   }
 }

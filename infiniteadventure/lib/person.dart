@@ -10,8 +10,8 @@ class Person extends SpriteAnimationComponent with TapCallbacks, HasGameRef<Endl
   double vx = 0;
   double vy = 0;
   double ax = 0;
-  double ay = 600;
-
+  double ay = 300;
+  
   int score = 0;
 
   late SpriteSheet normalSheet, jumpSheet;
@@ -22,22 +22,26 @@ class Person extends SpriteAnimationComponent with TapCallbacks, HasGameRef<Endl
   @override
   void onLoad() async{
     position = gameRef.size / 2;
-    size = Vector2(64.0, 64.0);
+    size = Vector2(50.0, 50.0);
     anchor = Anchor.center;
 
     normalSheet = SpriteSheet(
       image: await gameRef.images.load('fall.jpeg'),
-      srcSize: Vector2.all(32)
+      //image: await gameRef.images.load('idle.png'),
+      srcSize: Vector2(12.0, 19.0)
     );
     jumpSheet = SpriteSheet(
       image: await gameRef.images.load('jump.jpeg'),
-      srcSize: Vector2.all(32.0)
+      srcSize: Vector2(22.5, 22)
     );
 
     normalAnimation = normalSheet.createAnimation(
-      row: 0, stepTime: 0.2, from: 0, to: 0, loop: true 
+      //row: 0, stepTime: 0.2, from: 0, to: 0, loop: true
+      row: 0, stepTime: 0.2, from: 0, to: 1, loop: true
     );
-    jumpAnimation = jumpSheet.createAnimation(row: 0, stepTime: 0.2, from: 0, to: 7, loop: false );
+    jumpAnimation = jumpSheet.createAnimation(
+      row: 0, stepTime: 0.2, from: 0, to: 7, loop: false 
+    );
 
     animation = normalAnimation;
 
@@ -46,8 +50,8 @@ class Person extends SpriteAnimationComponent with TapCallbacks, HasGameRef<Endl
 
   @override
   void onTapUp(TapUpEvent event) async{
-    scale = Vector2(1, -2);
-    animation = jumpAnimation;
+    scale = Vector2(1, 2);
+    //animation = jumpAnimation;
     print('tocou no boneco');
   }
 
@@ -55,10 +59,15 @@ class Person extends SpriteAnimationComponent with TapCallbacks, HasGameRef<Endl
   void onTapDown(TapDownEvent event) {
     super.onTapDown(event);
     scale = Vector2(1.5, 1.5);
+    animation = normalAnimation;
   }
 
   void jump(){
-    vy = -400;
+    vy = -300;
+    animation = jumpAnimation;
+
+    
+    
   }
 
   @override
@@ -66,13 +75,20 @@ class Person extends SpriteAnimationComponent with TapCallbacks, HasGameRef<Endl
     super.update(dt);
 
     vy += ay * dt;
-
-    if(position.y - 40 >= gameRef.size.y){
+    if(position.y >= 500){
       ay = 0;
       vy = 0;
-
-      removeFromParent();
     }
+
+    //print(gameRef.size.y);
+    print(position.y);
+
+    // if(position.y - 40 >= gameRef.size.y){
+    //   ay = 0;
+    //   vy = 0;
+
+    //   removeFromParent();
+    // }
     position.x += vx * dt;
     position.y += vy * dt;
     
