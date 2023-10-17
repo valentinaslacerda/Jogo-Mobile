@@ -1,4 +1,6 @@
 import 'dart:async';
+import 'dart:io';
+import 'dart:math';
 import 'package:flame/components.dart';
 import 'package:flame/effects.dart';
 import 'package:flame/events.dart';
@@ -39,7 +41,7 @@ class EndlessAdventure extends FlameGame
   FutureOr<void> onLoad() async {
     final person = EmberPlayer(
       position: Vector2(100, 620),
-      size: Vector2.all(70),
+      size: Vector2.all(80),
       onTap: (emberPlayer) {
         emberPlayer.add(
           MoveEffect.to(
@@ -68,12 +70,9 @@ class EndlessAdventure extends FlameGame
             Parallax(await Future.wait(layers), baseVelocity: Vector2(50, 0)));
     //ADD
     add(parallaxComponent);
-    // tc = TextComponent(
-    //   text:
-    // )
-    // _person = Person();
-    // add(_person);
+
     add(person);
+    Random random = Random();
     final enemy = AnimatedEnemy(Vector2(600, 640), Vector2.all(60));
     enemy.velocity = Vector2(-200, 0);
     enemies.add(enemy);
@@ -92,7 +91,7 @@ class EndlessAdventure extends FlameGame
   void update(double dt) {
     if (!isGameOver) {
       super.update(dt);
-      if (score >= 300) {
+      if (score >= 10) {
         //dificuldade aumenta e score tbm, mudar velocidade do bg tbm
         for (final enemy in enemies) {
           enemy.position += enemy.velocity * dt;
@@ -107,6 +106,12 @@ class EndlessAdventure extends FlameGame
       score += 3 * dt;
     } else {
       textScore.text = "Game over: " + score.floor().toString();
+      score = 1;
+      for (final enemy in enemies) {
+        enemy.position += Vector2(-250, 0) * dt;
+      }
+
+      //isGameOver = false;
     }
   }
 

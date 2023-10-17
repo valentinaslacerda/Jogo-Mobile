@@ -22,15 +22,15 @@ class EmberPlayer extends SpriteAnimationComponent
 
   @override
   Future<void> onLoad() async {
-    hitbox = RectangleHitbox()
+    hitbox = CircleHitbox()
       ..paint = debugPaint
       ..renderShape = true;
     add(hitbox);
     animation = SpriteAnimation.fromFrameData(
       await Flame.images.load('player.png'),
       SpriteAnimationData.sequenced(
-        amount: 6,
-        textureSize: Vector2.all(24),
+        amount: 7,
+        textureSize: Vector2.all(80),
         stepTime: 0.24,
       ),
     );

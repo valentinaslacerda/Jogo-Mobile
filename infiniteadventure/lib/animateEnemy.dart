@@ -16,7 +16,7 @@ class AnimatedEnemy extends SpriteAnimationComponent
           size: size,
           animation: null,
         );
-  Vector2 velocity = Vector2(-200, 0);
+  Vector2 velocity = Vector2(-150, 0);
 
   @override
   FutureOr<void> onLoad() async {
@@ -29,8 +29,8 @@ class AnimatedEnemy extends SpriteAnimationComponent
     final spriteAnimation = SpriteAnimation.fromFrameData(
       image,
       SpriteAnimationData.sequenced(
-        amount: 6,
-        textureSize: Vector2.all(30),
+        amount: 9,
+        textureSize: Vector2.all(80),
         stepTime: 0.24,
       ),
     );
@@ -57,10 +57,9 @@ class AnimatedEnemy extends SpriteAnimationComponent
     if (position.x < 0) {
       //chegou no final da tela vai  gerar outro inimiog com y random
       Random random = Random();
-      position.y = position.y = random.nextInt(160) + 600;
+      position.y = random.nextInt(160) + 600;
 
       position.x = 400;
     }
-    position.y += velocity.y * dt;
   }
 }
