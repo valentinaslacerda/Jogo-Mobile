@@ -27,11 +27,11 @@ class EmberPlayer extends SpriteAnimationComponent
       ..renderShape = true;
     add(hitbox);
     animation = SpriteAnimation.fromFrameData(
-      await Flame.images.load('run.jpeg'),
+      await Flame.images.load('player.png'),
       SpriteAnimationData.sequenced(
-        amount: 4,
-        textureSize: Vector2.all(16),
-        stepTime: 0.12,
+        amount: 6,
+        textureSize: Vector2.all(24),
+        stepTime: 0.24,
       ),
     );
 

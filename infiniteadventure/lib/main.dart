@@ -39,8 +39,7 @@ class EndlessAdventure extends FlameGame
   FutureOr<void> onLoad() async {
     final person = EmberPlayer(
       position: Vector2(100, 620),
-      //position: Vector2(10, (size.y / 2) - 20),
-      size: Vector2.all(40),
+      size: Vector2.all(70),
       onTap: (emberPlayer) {
         emberPlayer.add(
           MoveEffect.to(
@@ -75,7 +74,7 @@ class EndlessAdventure extends FlameGame
     // _person = Person();
     // add(_person);
     add(person);
-    final enemy = AnimatedEnemy(Vector2(600, 640), Vector2.all(50));
+    final enemy = AnimatedEnemy(Vector2(600, 640), Vector2.all(60));
     enemy.velocity = Vector2(-200, 0);
     enemies.add(enemy);
     add(enemy);

@@ -20,17 +20,18 @@ class AnimatedEnemy extends SpriteAnimationComponent
 
   @override
   FutureOr<void> onLoad() async {
-    hitbox = RectangleHitbox()
+    hitbox = CircleHitbox(radius: size.x / 2)
       ..paint = debugPaint
       ..renderShape = true;
+
     add(hitbox);
-    final image = await Flame.images.load('fall.jpeg');
+    final image = await Flame.images.load('slime.png');
     final spriteAnimation = SpriteAnimation.fromFrameData(
       image,
       SpriteAnimationData.sequenced(
-        amount: 1,
-        textureSize: Vector2.all(42),
-        stepTime: 0.1,
+        amount: 6,
+        textureSize: Vector2.all(30),
+        stepTime: 0.24,
       ),
     );
 
@@ -56,7 +57,7 @@ class AnimatedEnemy extends SpriteAnimationComponent
     if (position.x < 0) {
       //chegou no final da tela vai  gerar outro inimiog com y random
       Random random = Random();
-      position.y = position.y = random.nextInt(50) + 600;
+      position.y = position.y = random.nextInt(160) + 600;
 
       position.x = 400;
     }
