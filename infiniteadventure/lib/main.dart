@@ -32,7 +32,7 @@ class EndlessAdventure extends FlameGame
   late TextComponent textScore;
   final scoreStyle = TextPaint(
     style: TextStyle(
-      fontSize: 48.0,
+      fontSize: 32.0,
       color: BasicPalette.white.color,
     ),
   );
@@ -41,7 +41,7 @@ class EndlessAdventure extends FlameGame
   FutureOr<void> onLoad() async {
     final person = EmberPlayer(
       position: Vector2(100, 620),
-      size: Vector2.all(80),
+      size: Vector2.all(90),
       onTap: (emberPlayer) {
         emberPlayer.add(
           MoveEffect.to(
@@ -91,8 +91,7 @@ class EndlessAdventure extends FlameGame
   void update(double dt) {
     if (!isGameOver) {
       super.update(dt);
-      if (score >= 10) {
-        //dificuldade aumenta e score tbm, mudar velocidade do bg tbm
+      if (score >= 100) {
         for (final enemy in enemies) {
           enemy.position += enemy.velocity * dt;
         }
@@ -100,13 +99,12 @@ class EndlessAdventure extends FlameGame
         score += velocityScore * dt;
       }
       for (final enemy in enemies) {
-        enemy.position += Vector2(-250, 0) * dt;
+        enemy.position += Vector2(-165, 0) * dt;
       }
       textScore.text = "Score: " + score.floor().toString();
       score += 3 * dt;
     } else {
       textScore.text = "Game over: " + score.floor().toString();
-      score = 1;
       for (final enemy in enemies) {
         enemy.position += Vector2(-250, 0) * dt;
       }

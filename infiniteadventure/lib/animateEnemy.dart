@@ -20,9 +20,9 @@ class AnimatedEnemy extends SpriteAnimationComponent
 
   @override
   FutureOr<void> onLoad() async {
-    hitbox = CircleHitbox(radius: size.x / 2)
+    hitbox = CircleHitbox(radius: size.x / 3)
       ..paint = debugPaint
-      ..renderShape = true;
+      ..renderShape = false;
 
     add(hitbox);
     final image = await Flame.images.load('slime.png');
@@ -47,7 +47,6 @@ class AnimatedEnemy extends SpriteAnimationComponent
       hitbox.renderShape = false;
       EndlessAdventure game = EndlessAdventure();
       (gameRef as EndlessAdventure).isGameOver = true;
-      print("AQUi");
     }
   }
 
@@ -55,7 +54,6 @@ class AnimatedEnemy extends SpriteAnimationComponent
   void update(double dt) {
     super.update(dt);
     if (position.x < 0) {
-      //chegou no final da tela vai  gerar outro inimiog com y random
       Random random = Random();
       position.y = random.nextInt(160) + 600;
 
